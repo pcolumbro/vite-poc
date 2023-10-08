@@ -2,6 +2,7 @@ import { Grid, Typography, Card, CardContent, Stack, Button, Box } from "@mui/ma
 import { prettyPrintJson } from "pretty-print-json";
 import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { Link } from "@mui/icons-material";
 
 const UserDemo = () => {
     
@@ -30,6 +31,9 @@ const UserDemo = () => {
                                 <Typography variant="h5">Actions</Typography>
                                 <Button onClick={() => dispatch({ type: 'user/populate' })}>Populate User</Button>
                                 <Button onClick={() => dispatch({ type: 'user/clear' })}>Clear User</Button>
+                                <Box sx={{paddingTop: 4}}>
+                                    <a href="https://github.com/pcolumbro/vite-poc" target="_blank">View Source</a>
+                                </Box>
                             </Stack>
                         </CardContent>
                     </Card>
