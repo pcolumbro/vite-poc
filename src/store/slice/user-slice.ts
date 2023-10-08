@@ -1,34 +1,38 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { User } from "../../types/user/user";
 import { generateMockUser } from "../../mock/user-repo";
+import { toast } from "react-toastify";
 
 interface UserState {
-    user: User | null;
+    value: User | null;
 }
 
 const initialState: UserState = {
-    user: null,
+    value: null,
 };
 
 export const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        populateUser: (state: UserState) => {
-            setTimeout(() => {
-                state.user = generateMockUser();
-            }, 5000);
+        populate: (state: UserState) => {
+            console.log('populating...')
+            if(!state.value){
+                state.value = generateMockUser();
+            }else{
+                toast.error("User already populated!");
+            }
         },
-        setUser: (state: UserState, action: PayloadAction<User>) => {
-            state.user = action.payload;
+        set: (state: UserState, action: PayloadAction<User>) => {
+            state.value = action.payload;
         },
-        clearUser: (state: UserState) => {
-            state.user = null;
+        clear: (state: UserState) => {
+            console.log('clearing...')
+            state.value = null;
         },
     },
 });
 
-export const { setUser, clearUser } = userSlice.actions;
-export const getUser = (state: UserState) => state.user;
-
+export const { set, clear, populate } = userSlice.actions;
+export const selectUser = (state: UserState) => state.value;
 export default userSlice.reducer;

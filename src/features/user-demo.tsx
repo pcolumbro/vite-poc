@@ -1,16 +1,25 @@
 import { Grid, Typography, Card, CardContent, Stack, Button, Box } from "@mui/material";
-import { User } from "../types/user/user";
 import { prettyPrintJson } from "pretty-print-json";
-import { generateMockUser } from "../mock/user-repo";
+import { useCallback } from "react";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 const UserDemo = () => {
+    
+    const removeHtmlTags = useCallback((str: string) => {
+        return str.replace(/<[^>]*>/g, '');
+    }, []);
+    
+    const user = useAppSelector((state) => state.users.value);
+    const dispatch = useAppDispatch();
 
-    const user = generateMockUser();
-    const formattedUser = prettyPrintJson.toHtml(user);
-
+    let display = 'No user set.';
+    if(user) {
+        display = removeHtmlTags(prettyPrintJson.toHtml(user, {indent: 2, }));
+    }
+    
     return(
         <Box sx={{padding: 2}}>
-            <Typography variant="h2">User Proof of Concept</Typography>
+            <Typography variant="h3">User Proof of Concept</Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                 </Grid>
@@ -18,9 +27,9 @@ const UserDemo = () => {
                     <Card>
                         <CardContent>
                             <Stack>
-                                <Typography variant="h3">Actions</Typography>
-                                <Button onClick={() => console.log('mock login')}>Mock Login</Button>
-                                <Button onClick={() => console.log('mock logout')}>Mock Logout</Button>
+                                <Typography variant="h5">Actions</Typography>
+                                <Button onClick={() => dispatch({ type: 'user/populate' })}>Populate User</Button>
+                                <Button onClick={() => dispatch({ type: 'user/clear' })}>Clear User</Button>
                             </Stack>
                         </CardContent>
                     </Card>
@@ -29,7 +38,7 @@ const UserDemo = () => {
                     <Card>
                         <CardContent>
                             <Typography variant="h5">User</Typography>
-                            <div dangerouslySetInnerHTML={{__html: formattedUser}}></div>
+                            <pre>{display}</pre>
                         </CardContent>
                     </Card>
                 </Grid>
