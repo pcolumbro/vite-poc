@@ -2,7 +2,14 @@ import { Grid, Typography, Card, CardContent, Stack, Button, Box } from "@mui/ma
 import { prettyPrintJson } from "pretty-print-json";
 import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { Link } from "@mui/icons-material";
+
+const linkStyle = {
+    color: 'white',
+    textDecoration: 'none',
+    '&:hover': {
+        textDecoration: 'underline',
+    },
+};
 
 const UserDemo = () => {
     
@@ -10,8 +17,8 @@ const UserDemo = () => {
         return str.replace(/<[^>]*>/g, '');
     }, []);
     
-    const user = useAppSelector((state) => state.users.value);
     const dispatch = useAppDispatch();
+    const user = useAppSelector((state) => state.user.value);
 
     let display = 'No user set.';
     if(user) {
@@ -27,12 +34,15 @@ const UserDemo = () => {
                 <Grid item xs={12} md={3}>
                     <Card>
                         <CardContent>
-                            <Stack>
+                            <Stack sx={{display: 'flex', justifyContent: 'center'}}>
                                 <Typography variant="h5">Actions</Typography>
                                 <Button onClick={() => dispatch({ type: 'user/populate' })}>Populate User</Button>
                                 <Button onClick={() => dispatch({ type: 'user/clear' })}>Clear User</Button>
                                 <Box sx={{paddingTop: 4}}>
-                                    <a href="https://github.com/pcolumbro/vite-poc" target="_blank">View Source</a>
+                                    <a style={linkStyle} href="https://github.com/pcolumbro/vite-poc" target="_blank">View Source</a>
+                                </Box>
+                                <Box>
+                                    <a style={linkStyle} href="https://redux.js.org/tutorials/essentials/part-1-overview-concepts" target="_blank">Redux Essential Reading</a>
                                 </Box>
                             </Stack>
                         </CardContent>
