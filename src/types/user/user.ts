@@ -1,12 +1,13 @@
+import { ClaimTypes } from "../../enum/claim-types";
 import { Note } from "../gen/note";
-import { Claim } from "./claim";
 
 export interface User {
     id: string;
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     
-    claims: Claim[];
+    claims: ClaimTypes[];
     notes: Note[];
 
     createdAt: Date;

@@ -1,12 +1,9 @@
-import { Container, Typography } from "@mui/material";
+import UserDemo from "./features/user-demo";
 
 function App() {
-  return (
-    <Container>
-        <Typography variant="h1" component="div" gutterBottom>
-          h1. Heading
-        </Typography>
-    </Container>
-  );
+
+    return (
+        <UserDemo />
+    );
 }
-export default App
+export default App;
