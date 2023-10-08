@@ -16,19 +16,21 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         populate: (state: UserState) => {
-            console.log('populating...')
             if(!state.value){
                 state.value = generateMockUser();
             }else{
-                toast.error("User already populated!");
+                toast.error("Populate failed. User already populated!");
             }
         },
         set: (state: UserState, action: PayloadAction<User>) => {
             state.value = action.payload;
         },
         clear: (state: UserState) => {
-            console.log('clearing...')
-            state.value = null;
+            if(state.value){
+                state.value = null;
+            }else{
+                toast.error("Clear failed. No user is currently set!");
+            }
         },
     },
 });
