@@ -43,6 +43,7 @@ const UserDemo = () => {
                                     <Stack spacing={2}>
                                         <a style={linkStyle} href="https://github.com/pcolumbro/vite-poc" target="_blank">View Source</a>
                                         <a style={linkStyle} href="https://redux.js.org/tutorials/essentials/part-1-overview-concepts" target="_blank">Redux Essential Reading</a>
+                                        <a style={linkStyle} href="https://changelog.com/posts/when-and-when-not-to-reach-for-redux" target="_blank">When to use Redux</a>
                                     </Stack>
                                 </Box>
                             </Stack>
