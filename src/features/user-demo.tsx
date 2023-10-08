@@ -38,11 +38,12 @@ const UserDemo = () => {
                                 <Typography variant="h5">Actions</Typography>
                                 <Button onClick={() => dispatch({ type: 'user/populate' })}>Populate User</Button>
                                 <Button onClick={() => dispatch({ type: 'user/clear' })}>Clear User</Button>
-                                <Box sx={{paddingTop: 4}}>
-                                    <a style={linkStyle} href="https://github.com/pcolumbro/vite-poc" target="_blank">View Source</a>
-                                </Box>
-                                <Box>
-                                    <a style={linkStyle} href="https://redux.js.org/tutorials/essentials/part-1-overview-concepts" target="_blank">Redux Essential Reading</a>
+                                <Typography variant="h5" sx={{paddingTop: 5}}>Links</Typography>
+                                <Box sx={{display: 'flex', justifyContent: 'center'}}>
+                                    <Stack spacing={2}>
+                                        <a style={linkStyle} href="https://github.com/pcolumbro/vite-poc" target="_blank">View Source</a>
+                                        <a style={linkStyle} href="https://redux.js.org/tutorials/essentials/part-1-overview-concepts" target="_blank">Redux Essential Reading</a>
+                                    </Stack>
                                 </Box>
                             </Stack>
                         </CardContent>
