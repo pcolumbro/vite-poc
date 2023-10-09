@@ -1,8 +1,8 @@
 import { Grid, Typography, Card, CardContent, Stack, Button, Box, TextField, InputLabel } from "@mui/material";
 import { prettyPrintJson } from "pretty-print-json";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { clear, populate, selectUser, update, updateEmail } from "../store/slice/user-slice";
+import { clear, populate, selectUser, updateEmail } from "../store/slice/user-slice";
 import { User } from "../types/user/user";
 import { toast } from "react-toastify";
 
@@ -35,11 +35,6 @@ const UserDemo = () => {
         const temp: User = {...localUser, [name]: value};
         setLocalUser(temp);
     };
-
-    let display = 'No user set.';
-    if(user) {
-        display = removeHtmlTags(prettyPrintJson.toHtml(user, {indent: 2, }));
-    }
     
     return(
         <Box sx={{padding: 4}}>
@@ -81,7 +76,7 @@ const UserDemo = () => {
                     <Card>
                         <CardContent>
                             <Typography variant="h5">User</Typography>
-                            <pre>{display}</pre>
+                            <pre>{user ? removeHtmlTags(prettyPrintJson.toHtml(user, {indent: 2, })) : 'No user set.'}</pre>
                         </CardContent>
                     </Card>
                 </Grid>
