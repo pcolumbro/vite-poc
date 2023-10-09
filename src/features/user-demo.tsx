@@ -1,4 +1,4 @@
-import { Grid, Typography, Card, CardContent, Stack, Button, Box, TextField, InputLabel } from "@mui/material";
+import { Grid, Typography, Card, CardContent, Stack, Button, Box, TextField, InputLabel, Divider } from "@mui/material";
 import { prettyPrintJson } from "pretty-print-json";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
@@ -49,18 +49,27 @@ const UserDemo = () => {
                                 <Typography variant="h5">Actions</Typography>
                                 <Button onClick={() => dispatch(populate())}>Populate User</Button>
                                 <Button onClick={() => dispatch(clear())}>Clear User</Button>
-                                <Box>
-                                    <InputLabel>Email</InputLabel>
-                                    <TextField
-                                        variant="outlined"
-                                        value={localUser?.email ?? ''}
-                                        onChange={handleChange}
+                                <Stack spacing={2}>
+                                    <Box>
+                                        <InputLabel>Email</InputLabel>
+                                        <TextField
+                                            variant="outlined"
+                                            value={localUser?.email ?? ''}
+                                            onChange={handleChange}
+                                            disabled={localUser === null}
+                                            fullWidth
+                                            name="email"
+                                        />
+                                    </Box>
+                                    <Button 
+                                        variant='contained'
+                                        color='success'
                                         disabled={localUser === null}
-                                        name="email"
-                                    />
-                                    <Button onClick={() => { localUser ? dispatch(updateEmail(localUser.email)) : toast.error('No user set.') }}>Save</Button>
-                                </Box>
-
+                                        onClick={() => { localUser ? dispatch(updateEmail(localUser.email)) : toast.error('No user set.') }}
+                                    >
+                                            Save
+                                    </Button>
+                                </Stack>
                                 
                                 <Typography variant="h5" sx={{paddingTop: 10}}>Links</Typography>
                                 <Box sx={{display: 'flex', justifyContent: 'center'}}>
