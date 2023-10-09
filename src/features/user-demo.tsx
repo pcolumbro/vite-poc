@@ -2,7 +2,7 @@ import { Grid, Typography, Card, CardContent, Stack, Button, Box, TextField, Inp
 import { prettyPrintJson } from "pretty-print-json";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { clear, populate, selectUser, updateEmail } from "../store/slice/user-slice";
+import { clear, populate, selectUser, update, updateEmail } from "../store/slice/user-slice";
 import { User } from "../types/user/user";
 import { toast } from "react-toastify";
 
@@ -65,7 +65,7 @@ const UserDemo = () => {
                                         variant='contained'
                                         color='success'
                                         disabled={localUser === null}
-                                        onClick={() => { localUser ? dispatch(updateEmail(localUser.email)) : toast.error('No user set.') }}
+                                        onClick={() => { localUser ? dispatch(update(localUser)) : toast.error('No user set.') }}
                                     >
                                             Save
                                     </Button>
