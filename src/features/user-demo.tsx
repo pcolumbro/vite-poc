@@ -41,7 +41,6 @@ const UserDemo = () => {
         display = removeHtmlTags(prettyPrintJson.toHtml(user, {indent: 2, }));
     }
     
-    console.log('localUser', localUser)
     return(
         <Box sx={{padding: 4}}>
             <Typography variant="h3">User Proof of Concept</Typography>
@@ -59,8 +58,9 @@ const UserDemo = () => {
                                     <InputLabel>Email</InputLabel>
                                     <TextField
                                         variant="outlined"
-                                        value={localUser?.email}
+                                        value={localUser?.email ?? ''}
                                         onChange={handleChange}
+                                        disabled={localUser === null}
                                         name="email"
                                     />
                                     <Button onClick={() => { localUser ? dispatch(updateEmail(localUser.email)) : toast.error('No user set.') }}>Save</Button>
