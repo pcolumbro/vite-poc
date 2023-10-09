@@ -3,7 +3,7 @@ import { prettyPrintJson } from "pretty-print-json";
 import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { useSelector } from "react-redux";
-import { selectUser } from "../store/slice/user-slice";
+import { clear, populate, selectUser } from "../store/slice/user-slice";
 
 const linkStyle = {
     color: 'white',
@@ -20,7 +20,7 @@ const UserDemo = () => {
     }, []);
     
     const dispatch = useAppDispatch();
-    const user = useSelector(selectUser);
+    const user = useAppSelector(selectUser);
 
     let display = 'No user set.';
     if(user) {
@@ -38,8 +38,8 @@ const UserDemo = () => {
                         <CardContent>
                             <Stack spacing={1} sx={{display: 'flex', justifyContent: 'center'}}>
                                 <Typography variant="h5">Actions</Typography>
-                                <Button onClick={() => dispatch({ type: 'user/populate' })}>Populate User</Button>
-                                <Button onClick={() => dispatch({ type: 'user/clear' })}>Clear User</Button>
+                                <Button onClick={() => dispatch(populate())}>Populate User</Button>
+                                <Button onClick={() => dispatch(clear())}>Clear User</Button>
                                 <Typography variant="h5" sx={{paddingTop: 5}}>Links</Typography>
                                 <Box sx={{display: 'flex', justifyContent: 'center'}}>
                                     <Stack spacing={2}>

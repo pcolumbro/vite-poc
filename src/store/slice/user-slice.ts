@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { User } from "../../types/user/user";
 import { generateMockUser } from "../../mock/user-repo";
 import { toast } from "react-toastify";
+import { RootState } from "../store";
 
 interface UserState {
     value: User | null;
@@ -41,6 +42,8 @@ export const userSlice = createSlice({
         },
     },
 });
-export const selectUser = (state: { user: UserState }) => state.user.value;
+
+export const selectUser = (state: RootState) => state.user.value;
+
 export const { set, clear, populate } = userSlice.actions;
 export default userSlice.reducer;
