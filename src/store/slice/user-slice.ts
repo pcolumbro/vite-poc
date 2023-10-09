@@ -40,10 +40,17 @@ export const userSlice = createSlice({
                 toast.error("Update failed. No user is currently set!");
             }
         },
+        updateEmail: (state: UserState, action: PayloadAction<string>) => {
+            if(state.value){
+                state.value.email = action.payload;
+            }else{
+                toast.error("Update failed. No user is currently set!");
+            }
+        },
     },
 });
 
 export const selectUser = (state: RootState) => state.user.value;
 
-export const { set, clear, populate } = userSlice.actions;
+export const { set, clear, populate, update, updateEmail } = userSlice.actions;
 export default userSlice.reducer;

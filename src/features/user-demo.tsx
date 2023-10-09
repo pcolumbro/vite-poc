@@ -1,9 +1,10 @@
-import { Grid, Typography, Card, CardContent, Stack, Button, Box } from "@mui/material";
+import { Grid, Typography, Card, CardContent, Stack, Button, Box, TextField, InputLabel } from "@mui/material";
 import { prettyPrintJson } from "pretty-print-json";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { useSelector } from "react-redux";
-import { clear, populate, selectUser } from "../store/slice/user-slice";
+import { clear, populate, selectUser, update, updateEmail } from "../store/slice/user-slice";
+import { User } from "../types/user/user";
+import { toast } from "react-toastify";
 
 const linkStyle = {
     color: 'white',
@@ -13,20 +14,35 @@ const linkStyle = {
     },
 };
 
+const removeHtmlTags = (str: string) => {
+    return str.replace(/<[^>]*>/g, '');
+}
+
 const UserDemo = () => {
     
-    const removeHtmlTags = useCallback((str: string) => {
-        return str.replace(/<[^>]*>/g, '');
-    }, []);
-    
-    const dispatch = useAppDispatch();
     const user = useAppSelector(selectUser);
+    const dispatch = useAppDispatch();
+
+    const [localUser, setLocalUser] = useState<User | null>(user);
+
+    useEffect(() => {
+        setLocalUser(user);
+    }, [user]);
+
+    const handleChange = (e: any) => {
+        if(localUser === null) return;
+        const { name, value } = e.target;
+        const temp: User = {...localUser};
+        temp[name as keyof User] = value;
+        setLocalUser(temp);
+    };
 
     let display = 'No user set.';
     if(user) {
         display = removeHtmlTags(prettyPrintJson.toHtml(user, {indent: 2, }));
     }
     
+    console.log('localUser', localUser)
     return(
         <Box sx={{padding: 4}}>
             <Typography variant="h3">User Proof of Concept</Typography>
@@ -40,7 +56,19 @@ const UserDemo = () => {
                                 <Typography variant="h5">Actions</Typography>
                                 <Button onClick={() => dispatch(populate())}>Populate User</Button>
                                 <Button onClick={() => dispatch(clear())}>Clear User</Button>
-                                <Typography variant="h5" sx={{paddingTop: 5}}>Links</Typography>
+                                <Box>
+                                    <InputLabel>Email</InputLabel>
+                                    <TextField
+                                        variant="outlined"
+                                        value={localUser?.email}
+                                        onChange={handleChange}
+                                        name="email"
+                                    />
+                                    <Button onClick={() => { localUser ? dispatch(updateEmail(localUser.email)) : toast.error('No user set.') }}>Save</Button>
+                                </Box>
+
+                                
+                                <Typography variant="h5" sx={{paddingTop: 10}}>Links</Typography>
                                 <Box sx={{display: 'flex', justifyContent: 'center'}}>
                                     <Stack spacing={2}>
                                         <a style={linkStyle} href="https://github.com/pcolumbro/vite-poc" target="_blank">View Source</a>
