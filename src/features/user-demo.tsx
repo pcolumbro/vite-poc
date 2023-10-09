@@ -29,11 +29,10 @@ const UserDemo = () => {
         setLocalUser(user);
     }, [user]);
 
-    const handleChange = (e: any) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if(localUser === null) return;
         const { name, value } = e.target;
-        const temp: User = {...localUser};
-        temp[name as keyof User] = value;
+        const temp: User = {...localUser, [name]: value};
         setLocalUser(temp);
     };
 
