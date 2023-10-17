@@ -8,6 +8,7 @@ hosted on [Cloudflare Pages](https://vite-poc.pages.dev/)
 3. [Reddit post from Redux Maintainer](https://www.reddit.com/r/reactjs/comments/z4y7sj/comment/ixtfehr/?utm_source=share&utm_medium=web2x&context=3)
 4. [Code splitting RTK query](https://redux-toolkit.js.org/rtk-query/usage/code-splitting)
 5. [Tao of Redux](https://blog.isquaredsoftware.com/2017/05/idiomatic-redux-tao-of-redux-part-1/)
+6. [Immer: immutable updates](https://www.npmjs.com/package/immer)
 
 
 # Redux Selectors
