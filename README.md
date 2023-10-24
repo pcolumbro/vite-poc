@@ -9,6 +9,7 @@ hosted on [Cloudflare Pages](https://vite-poc.pages.dev/)
 4. [Code splitting RTK query](https://redux-toolkit.js.org/rtk-query/usage/code-splitting)
 5. [Tao of Redux](https://blog.isquaredsoftware.com/2017/05/idiomatic-redux-tao-of-redux-part-1/)
 6. [Immer: immutable updates](https://www.npmjs.com/package/immer)
+7. [faq on redux](https://redux.js.org/faq/organizing-state#should-i-put-form-state-or-other-ui-state-in-my-store)
 
 
 # Redux Selectors
