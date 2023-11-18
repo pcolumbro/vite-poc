@@ -12,7 +12,4 @@ export interface User {
 
     createdAt: Date;
     updatedAt: Date;
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    // [key: string]: any;
 }
